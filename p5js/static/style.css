@@ -1,0 +1,20 @@
+*, html, body {
+	margin: 0;
+	padding: 0;
+}  
+
+canvas {
+	position: absolute;
+}
+
+#container {
+	z-index: 10;
+}
+
+#container canvas {
+	z-index: 20;
+}
+
+#defaultCanvas {
+	z-index: 5;
+}

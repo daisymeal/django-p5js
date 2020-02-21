@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Django - three.js + p5js integration</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" />
+  <script type="x-shader/x-vertex" id="vertexShader">
+          
+          uniform sampler2D displaceMap;
+          uniform float maxDisplacement;
+          
+          void main()
+          {
+              originalMain();
+              
+              float displacement = maxDisplacement * (1. - texture2D(displaceMap, uv).r);
+              
+              vec3 newPosition = position;
+              newPosition.y -= displacement;
+              
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+          }
+        
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js'></script>
+  <script src="{% static 'script.js' %}"></script>
+</head>
+<body>
+<div id="container"></div>
+</body>
+</html>
